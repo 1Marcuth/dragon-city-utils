@@ -1,10 +1,10 @@
-from setuptools import setup
+from setuptools import setup, find_packages
 
 with open("README.md", "r") as file:
     readme_content = file.read()
 
 setup(
-    name="encurtanet",
+    name="dragon-city-utils",
     version="1.0",
     license="MIT License",
     author="Marcuth",
@@ -13,6 +13,14 @@ setup(
     author_email="marcuth2006@gmail.com",
     keywords="dragoncity dcutils tools",
     description=f"Utilities and tools for things related to Dragon City",
-    packages=["encurtanet"],
+    packages=[
+        "dcutils",
+        "dcutils/static",
+        "dcutils/static/animations",
+        "dcutils/static/animations/flash",
+        "dcutils/static/animations/spine",
+        "dcutils/static/sprites",
+        "dcutils/static/sprites"
+    ],
     install_requires=["httpx", "pydantic", "python-filter"],
 )
