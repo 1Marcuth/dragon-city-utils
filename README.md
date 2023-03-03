@@ -62,3 +62,13 @@ dragon_spine_animation = DragonSpineAnimation(
 
 dragon_spine_animation.download("dragon_spine_animation.zip")
 ```
+
+### Island packages
+
+```py
+from dcutils.static.islands import IslandPackage
+
+island_package = IslandPackage("/mobile/ui/heroicraces_islands/hr_71_heroicorigins.zip")
+
+island_package.download("island_package.zip")
+```
