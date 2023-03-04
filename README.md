@@ -68,7 +68,18 @@ dragon_spine_animation.download("dragon_spine_animation.zip")
 ```py
 from dcutils.static.islands import IslandPackage
 
-island_package = IslandPackage("/mobile/ui/heroicraces_islands/hr_71_heroicorigins.zip")
+island_package = IslandPackage(uri="/mobile/ui/heroicraces_islands/hr_71_heroicorigins.zip")
 
 island_package.download("island_package.zip")
+```
+
+### Sounds
+
+#### Musics
+```py
+from dcutils.static.sounds import GeneralMusic
+
+music = GeneralMusic(music_name="531_dc_party_planning_island")
+
+music.download("531_dc_party_planning_island.mp3")
 ```
