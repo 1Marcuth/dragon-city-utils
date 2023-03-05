@@ -16,7 +16,7 @@ dragon_sprite = DragonSprite(
     image_quality=2
 )
 
-dragon_sprite.download("dragon_nature_sprite.png")
+dragon_sprite.download(output="dragon_nature_sprite.png")
 ```
 
 #### Dragon thumb
@@ -30,7 +30,7 @@ dragon_thumb = DragonThumb(
     skin=1
 )
 
-dragon_thumb.download("dragon_nature_thumb.png")
+dragon_thumb.download(output="dragon_nature_thumb.png")
 ```
 
 ### Animations
@@ -46,7 +46,7 @@ dragon_flash_animation = DragonFlashAnimation(
     skin=1
 )
 
-dragon_flash_animation.download("dragon_nature_flash_animation.swf")
+dragon_flash_animation.download(output="dragon_nature_flash_animation.swf")
 ```
 
 #### Dragon Animation (Spine Animation)
@@ -60,7 +60,7 @@ dragon_spine_animation = DragonSpineAnimation(
     skin=1
 )
 
-dragon_spine_animation.download("dragon_spine_animation.zip")
+dragon_spine_animation.download(output="dragon_spine_animation.zip")
 ```
 
 ### Island packages
@@ -70,7 +70,7 @@ from dcutils.static.islands import IslandPackage
 
 island_package = IslandPackage(uri="/mobile/ui/heroicraces_islands/hr_71_heroicorigins.zip")
 
-island_package.download("island_package.zip")
+island_package.download(output="island_package.zip")
 ```
 
 ### Sounds
@@ -81,7 +81,7 @@ from dcutils.static.sounds import GeneralMusic
 
 music = GeneralMusic(music_name="531_dc_party_planning_island")
 
-music.download("531_dc_party_planning_island.mp3")
+music.download(output="531_dc_party_planning_island.mp3")
 ```
 
 ## Calculators
