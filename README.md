@@ -83,3 +83,38 @@ music = GeneralMusic(music_name="531_dc_party_planning_island")
 
 music.download("531_dc_party_planning_island.mp3")
 ```
+
+## Calculators
+
+### Calculate elements strongs
+
+```py
+from dcutils.calculators import calculate_strongs
+
+strongs = calculate_strongs(elements=["terra", "flame"])
+```
+```
+['electric', 'flame', 'nature', 'ice']
+```
+
+### Calculate elements weaknesses
+
+```py
+from dcutils.calculators import calculate_weaknesses
+
+weaknesses = calculate_weaknesses(first_element="terra")
+```
+```
+['metal', 'war']
+```
+
+### Calculate orb recall gain
+
+```py
+from dcutils.calculators import calculate_orb_recall_gain
+
+orb_recall_gain = calculate_orb_recall_gain(dragon_level=15, dragon_stars=2)
+```
+```
+389
+```
