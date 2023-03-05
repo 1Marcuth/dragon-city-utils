@@ -46,7 +46,7 @@ dragon_flash_animation = DragonFlashAnimation(
     skin=1
 )
 
-dragon_flash_animation.download("drago_nature_flash_animation.swf")
+dragon_flash_animation.download("dragon_nature_flash_animation.swf")
 ```
 
 #### Dragon Animation (Spine Animation)
