@@ -1,18 +1,53 @@
 from pydantic import validate_arguments
-from pyfilter import FromList
+from pyfilter import FromDictList
 import httpx
 
 class Localization:
     @validate_arguments
-    def __init__(self, language: str) -> None:
-        self.__endpoint_url = f"https://sp-translations.socialpointgames.com/deploy/dc/android/prod/dc_android_{language}_prod_wetd46pWuR8J5CmS.json"
-        self.__localization = self.__fetch()
-        self.__localization_dict = FromList(self.__localization).join_keys_of_child_dicts_in_a_new_dict()
+    def __init__(
+        self,
+        language: str = "",
+        loc: list[dict] | dict | None = None
+    ) -> None:
+        if loc is None:
+            self.__endpoint_url = f"https://sp-translations.socialpointgames.com/deploy/dc/android/prod/dc_android_{language}_prod_wetd46pWuR8J5CmS.json"
+            self.__localization = self.__fetch()
+            self.__localization_dict = FromDictList(self.__localization).join_keys_of_child_dicts_in_a_new_dict()
+
+        else:
+            self.__load(loc)
 
     def __fetch(self) -> list[dict]:
         response = httpx.get(self.__endpoint_url)
         data = response.json()
         return data
+
+    @validate_arguments
+    def __load(self, loc: list | dict):
+        type_ = type(loc)
+
+        if type_ == list:
+            self.__load_list(loc)
+
+        elif type_ == dict:
+            self.__load_dict(loc)
+
+        else:
+            raise ValueError(f"{type_} is an invalid type to load a location")
+
+    @validate_arguments
+    def __load_list(self, loc: list[dict]):
+        self.__localization = loc
+        self.__localization_dict = FromDictList(loc).join_keys_of_child_dicts_in_a_new_dict()
+
+    @validate_arguments
+    def __load_dict(self, loc: dict):
+        self.__localization_dict = loc
+        self.__localization = []
+
+        for key, value in loc.items():
+            dict_ = { key: value }
+            self.__localization.append(dict_)
 
     @validate_arguments
     def get_value_from_key(self, key: str) -> str | None:
@@ -89,7 +124,7 @@ class Localization:
     @validate_arguments
     def compare(self, old_localization: dict | list) -> dict[str, list]:
         if type(old_localization) == list:
-            old_localization = FromList(old_localization).join_keys_of_child_dicts_in_a_new_dict()
+            old_localization = FromDictList(old_localization).join_keys_of_child_dicts_in_a_new_dict()
 
         new_fields = []
         edited_fields = []
