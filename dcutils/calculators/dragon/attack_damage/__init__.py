@@ -13,7 +13,7 @@ def calculate_attack_damage(
     level: int,
     attack_power: int,
     rank_class: int = 0,
-    stars: int = 0,
+    stars: int = 0
 ) -> dict:
     initial_damage = attack_categories_powers[category]
 

@@ -19,7 +19,9 @@ def calculate_status(
     stars: int = 0,
     hp_runes: int = 0,
     damage_runes: int = 0,
-    with_tower_bonus: bool = False
+    with_tower_bonus: bool = False,
+    extra_hp_multiplier: float = 0.0,
+    extra_damage_multiplier: float = 0.0
 ) -> dict:
     initial_status = level_and_category_power[category][level]
     initial_hp = initial_status["hp"]
@@ -60,15 +62,27 @@ def calculate_status(
         runes_damage_bonus = 0
 
     if with_tower_bonus:
-        tower_hp_bonus = (stars_hp_bonus + runes_hp_bonus + rank_class_hp_bonus) * hp_tower_power
-        tower_damage_bonus = (rank_class_damage_bonus + stars_damage_bonus + runes_damage_bonus) * damage_tower_power
+        tower_hp_bonus = (hp + (stars_hp_bonus + runes_hp_bonus + rank_class_hp_bonus)) * hp_tower_power
+        tower_damage_bonus = (damage + (rank_class_damage_bonus + stars_damage_bonus + runes_damage_bonus)) * damage_tower_power
 
     else:
         tower_hp_bonus = 0
         tower_damage_bonus = 0
+
+    if extra_damage_multiplier != 0.0:
+        extra_damage_bonus = (damage + (stars_damage_bonus + runes_damage_bonus + rank_class_damage_bonus)) * extra_damage_multiplier
+
+    else:
+        extra_damage_bonus = 0
+
+    if extra_hp_multiplier != 0.0:
+        extra_hp_bonus = (hp + (stars_hp_bonus + runes_hp_bonus + rank_class_hp_bonus)) * extra_hp_multiplier
+
+    else:
+        extra_hp_bonus = 0
     
-    hp += stars_hp_bonus + runes_hp_bonus + rank_class_hp_bonus + tower_hp_bonus
-    damage += rank_class_damage_bonus + stars_damage_bonus + runes_damage_bonus + tower_damage_bonus
+    hp += stars_hp_bonus + runes_hp_bonus + rank_class_hp_bonus + tower_hp_bonus + extra_hp_bonus
+    damage += rank_class_damage_bonus + stars_damage_bonus + runes_damage_bonus + tower_damage_bonus + extra_damage_bonus
 
     if category == 9:
         hp += hp * .10293
@@ -82,8 +96,8 @@ def calculate_status(
             damage = damage
         ),
         initial = dict(
-            hp = initial_hp,
-            damage = initial_damage, 
+            hp = round(initial_hp),
+            damage = round(initial_damage), 
         ),
         bonus = dict(
             rank_class = dict(
@@ -101,6 +115,10 @@ def calculate_status(
             tower = dict(
                 hp = round(tower_hp_bonus),
                 damage = round(tower_damage_bonus)
+            ),
+            extra = dict(
+                hp = round(extra_hp_bonus),
+                damage = round(extra_damage_bonus)
             )
         )
     )
