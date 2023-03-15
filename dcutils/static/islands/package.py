@@ -5,13 +5,13 @@ class IslandPackage(BaseStaticDownloader):
         self,
         uri: str
     ) -> None:
-        uri = uri.split("/")
-        type_ = uri[3]
-        filename = uri[4]
+        uri_splited = uri.split("/")
+        type_ = uri_splited[3]
+        filename = uri_splited[4]
 
         if type_ == "grid_islands":
             filename.replace(".zip", "_optim.zip")
 
         self.url = f"https://www.socialpointgames.com/static/dragoncity/mobile/ui/{type_}/HD/dxt5/{filename}"
 
-__all__ = [ IslandPackage ]
+__all__ = [ "IslandPackage" ]
