@@ -7,4 +7,4 @@ class GeneralMusic(BaseStaticDownloader):
     ) -> None:
         self.url = f"http://dci-static-s1.socialpointgames.com/static/dragoncity/mobile/sounds/music/{music_name}.mp3"
 
-__all__ = [ GeneralMusic ]
+__all__ = [ "GeneralMusic" ]

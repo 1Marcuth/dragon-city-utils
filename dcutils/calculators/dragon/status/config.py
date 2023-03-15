@@ -1,9 +1,10 @@
-hp_rune_power = 0.03
-damage_rune_power = 0.03
+category_9_dragons_hp_fix = .10293
+hp_rune_power = .03
+damage_rune_power = .03
 hp_tower_power = .19997683091189998
 damage_tower_power = .19997683091189998
 
-level_and_category_power = {
+category_and_level_power = {
     1: {
         1: {
             "damage": 140,

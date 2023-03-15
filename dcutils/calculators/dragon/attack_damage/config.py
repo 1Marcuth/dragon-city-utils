@@ -1,4 +1,4 @@
-rank_class_powers = {
+rank_class_power = {
     1: .5,
     2: .10,
     3: .15,
@@ -13,9 +13,9 @@ rank_class_powers = {
     12: .70
 }
 
-star_power = 0.38223
+one_star_power = 0.38223
 
-attack_categories_powers = {
+attack_categories_power = {
     1: 3200,
     2: 3600,
     3: 4000,

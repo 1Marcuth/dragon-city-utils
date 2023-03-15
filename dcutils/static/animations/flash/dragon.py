@@ -13,12 +13,12 @@ class DragonFlashAnimation(BaseStaticDownloader):
         if phase < 0 or phase > 3:
             raise ValueError(f"{phase} Not a valid number for a dragon's phase. Choose a number between 0 and 3")
 
-        if skin:
-            skin = f"_skin{skin}"
+        if skin and skin > 0:
+            skin_str = f"_skin{skin}"
         
         else:
-            skin = ""
+            skin_str = ""
 
-        self.url = f"https://dci-static-s1.socialpointgames.com/static/dragoncity/assets/sprites/{image_name}{skin}_{phase}.swf"
+        self.url = f"https://dci-static-s1.socialpointgames.com/static/dragoncity/assets/sprites/{image_name}{skin_str}_{phase}.swf"
 
-__all__ = [ DragonFlashAnimation ]
+__all__ = [ "DragonFlashAnimation" ]

@@ -85,4 +85,4 @@ ELEMENTS_CONFIG = {
     }
 }
 
-__all__ = [ ELEMENTS_CONFIG ]
+__all__ = [ "ELEMENTS_CONFIG" ]

@@ -6,16 +6,19 @@ class Localization:
     @validate_arguments
     def __init__(
         self,
-        language: str = "",
+        language: str | None = None,
         loc: list[dict] | dict | None = None
     ) -> None:
-        if loc is None:
+        if language:
             self.__endpoint_url = f"https://sp-translations.socialpointgames.com/deploy/dc/android/prod/dc_android_{language}_prod_wetd46pWuR8J5CmS.json"
             self.__localization = self.__fetch()
-            self.__localization_dict = FromDictList(self.__localization).join_keys_of_child_dicts_in_a_new_dict()
+            self.__localization_dict = FromDictList(self.__localization).concatenate_child_dicts_into_a_new_dict()
+
+        elif loc:
+            self.__load(loc)
 
         else:
-            self.__load(loc)
+            raise ValueError()
 
     def __fetch(self) -> list[dict]:
         response = httpx.get(self.__endpoint_url)
@@ -27,18 +30,18 @@ class Localization:
         type_ = type(loc)
 
         if type_ == list:
-            self.__load_list(loc)
+            self.__load_list(list(loc))
 
         elif type_ == dict:
-            self.__load_dict(loc)
+            self.__load_dict(dict(loc))
 
         else:
-            raise ValueError(f"{type_} is an invalid type to load a location")
+            raise ValueError(f"{type_} is an invalid type to load a localization")
 
     @validate_arguments
     def __load_list(self, loc: list[dict]):
         self.__localization = loc
-        self.__localization_dict = FromDictList(loc).join_keys_of_child_dicts_in_a_new_dict()
+        self.__localization_dict = FromDictList(loc).concatenate_child_dicts_into_a_new_dict()
 
     @validate_arguments
     def __load_dict(self, loc: dict):
@@ -124,12 +127,12 @@ class Localization:
     @validate_arguments
     def compare(self, old_localization: dict | list) -> dict[str, list]:
         if type(old_localization) == list:
-            old_localization = FromDictList(old_localization).join_keys_of_child_dicts_in_a_new_dict()
+            old_localization = FromDictList(list(old_localization)).concatenate_child_dicts_into_a_new_dict()
 
         new_fields = []
         edited_fields = []
 
-        old_localization_keys = old_localization.keys()
+        old_localization_keys = dict(old_localization).keys()
         for key in self.__localization_dict.keys():
             if key not in old_localization_keys:
                 new_fields.append({
@@ -150,10 +153,10 @@ class Localization:
             edited_fields = edited_fields
         )
 
-    def get(self):
+    def get_list(self):
         return self.__localization
 
     def get_dict(self):
         return self.__localization_dict
 
-__all__ = [ Localization ]
+__all__ = [ "Localization" ]

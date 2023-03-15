@@ -7,9 +7,9 @@ def calculate_strongs(elements: list[str]) -> list[str]:
     strongs = []
 
     for element in elements:
-        strong = ELEMENTS_CONFIG[element]["strongs"]
+        preview_strongs = ELEMENTS_CONFIG[element]["strongs"]
 
-        for element in strong:
+        for element in preview_strongs:
             if not element in strongs:
                 strongs.append(element)
 
@@ -19,13 +19,15 @@ def calculate_strongs(elements: list[str]) -> list[str]:
 def calculate_weaknesses(first_element: str) -> list[str] | list:
     weaknesses = []
 
-    for key in ELEMENTS_CONFIG.keys():
-        if first_element in ELEMENTS_CONFIG[key]["strongs"]:
-            weaknesses.append(key)
+    for element in ELEMENTS_CONFIG.keys():
+        element_strongs = ELEMENTS_CONFIG[element]["strongs"]
+
+        if first_element in element_strongs:
+            weaknesses.append(element)
 
     return weaknesses
 
 __all__ = [
-    calculate_strongs,
-    calculate_weaknesses
+    "calculate_strongs",
+    "calculate_weaknesses"
 ]

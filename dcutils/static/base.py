@@ -8,4 +8,4 @@ class BaseStaticDownloader:
     def download(self, output: str):
         urlretrieve(self.url, output)
 
-__all__ = [ BaseStaticDownloader ]
+__all__ = [ "BaseStaticDownloader" ]
