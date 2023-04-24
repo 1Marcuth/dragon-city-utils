@@ -136,24 +136,7 @@ elements_result = elements_detector.detect(image_path="ui_3110_dragon_hoarderete
 ```
 **Output:**
 ```
-[
-    {
-        "element": "ice",
-        "confidence_score": 0.4871271550655365   
-    },
-    {
-        "element": "nature",
-        "confidence_score": 0.296091228723526
-    },
-    {
-        "element": "flame",
-        "confidence_score": 0.16774502396583557
-    },
-    {
-        "element": "sea",
-        "confidence_score": 0.03868602588772774
-    }
-]
+[{'element': 'ice', 'confidence_score': 0.4871271550655365}, {'element': 'nature', 'confidence_score': 0.296091228723526}, {'element': 'flame', 'confidence_score': 0.16774502396583557}, {'element': 'sea', 'confidence_score': 0.03868602588772774}]
 ```
 
 #### Phase detector
@@ -166,8 +149,106 @@ phase_result = phase_detector.detect(image_path="ui_3110_dragon_hoardereternal_1
 ```
 **Output:**
 ```
-{
-    "phase": "baby",
-    "confidence_score": 0.9999938011169434
-}
+{'phase': 'baby', 'confidence_score': 0.9999938011169434}
+```
+
+### Url parser
+
+#### From flash animation
+```py
+from dcutils.tools.url_parser.dragon import DragonUrlParser
+
+result = DragonUrlParser.from_flash_animation("https://dci-static-s1.socialpointgames.com/static/dragoncity/assets/sprites/1000_dragon_nature_skin1_3.swf")
+```
+**Output:**
+```
+{'id': 1000, 'image_name': '1000_dragon_nature', 'phase': 3, 'skin': 'skin1'}
+```
+
+#### From spine atimation
+```py
+from dcutils.tools.url_parser.dragon import DragonUrlParser
+
+result = DragonUrlParser.fromspine_animation("https://dci-static-s1.socialpointgames.com/static/dragoncity/mobile/engine/version_1_1/dragons/1000_dragon_nature_3/1000_dragon_nature_skin1_3_HD_tweened_dxt5.zip")
+```
+**Output:**
+```
+{'id': 1000, 'image_name': '1000_dragon_nature', 'phase': 3, 'skin': 'skin1'}
+```
+
+#### From sprite
+```py
+from dcutils.tools.url_parser.dragon import DragonUrlParser
+
+result = DragonUrlParser.from_sprite("https://dci-static-s1.socialpointgames.com/static/dragoncity/mobile/ui/dragons/ui_1000_dragon_nature_skin1_3@2x.png")
+```
+**Output:**
+```
+{'id': 1000, 'image_name': '1000_dragon_nature', 'phase': 3, 'skin': 'skin1', 'image_qualitity': '@2x'}
+```
+
+#### From thumb
+```py
+from dcutils.tools.url_parser.dragon import DragonUrlParser
+
+result = DragonUrlParser.from_thumb("https://dci-static-s1.socialpointgames.com/static/dragoncity/mobile/ui/dragons/HD/thumb_1000_dragon_nature_skin1_3.png")
+```
+**Output:**
+```
+{'id': 1000, 'image_name': '1000_dragon_nature', 'phase': 3, 'skin': 'skin1'}
+```
+
+#### Get id from anyone
+```py
+from dcutils.tools.url_parser.dragon import DragonUrlParser
+
+result = DragonUrlParser.get_id("https://dci-static-s1.socialpointgames.com/static/dragoncity/mobile/ui/dragons/HD/thumb_1000_dragon_nature_skin1_3.png")
+```
+**Output:**
+```
+1000
+```
+
+#### Get image name from anyone
+```py
+from dcutils.tools.url_parser.dragon import DragonUrlParser
+
+result = DragonUrlParser.get_image_name("https://dci-static-s1.socialpointgames.com/static/dragoncity/mobile/ui/dragons/HD/thumb_1000_dragon_nature_skin1_3.png")
+```
+**Output:**
+```
+1000_dragon_nature
+```
+
+#### Get image qualitity from anyone
+```py
+from dcutils.tools.url_parser.dragon import DragonUrlParser
+
+result = DragonUrlParser.get_image_qualitity("https://dci-static-s1.socialpointgames.com/static/dragoncity/mobile/ui/dragons/ui_1000_dragon_nature_skin1_3@2x.png")
+```
+**Output:**
+```
+@2x
+```
+
+#### Get phase from anyone
+```py
+from dcutils.tools.url_parser.dragon import DragonUrlParser
+
+result = DragonUrlParser.get_phase("https://dci-static-s1.socialpointgames.com/static/dragoncity/mobile/ui/dragons/ui_1000_dragon_nature_skin1_3@2x.png")
+```
+**Output:**
+```
+3
+```
+
+#### Get skin from anyone
+```py
+from dcutils.tools.url_parser.dragon import DragonUrlParser
+
+result = DragonUrlParser.get_skin("https://dci-static-s1.socialpointgames.com/static/dragoncity/mobile/ui/dragons/ui_1000_dragon_nature_skin1_3@2x.png")
+```
+**Output:**
+```
+skin1
 ```
