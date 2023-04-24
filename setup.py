@@ -14,7 +14,7 @@ requirements = ['anyio', 'bleach', 'certifi', 'charset-normalizer', 'docutils', 
 
 setup(
     name="dragon-city-utils",
-    version="1.18.0.1",
+    version="1.18.0.1.5",
     license="MIT License",
     author="Marcuth",
     long_description=readme_content,
