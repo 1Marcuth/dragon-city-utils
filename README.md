@@ -84,12 +84,14 @@ music = GeneralMusic(music_name="531_dc_party_planning_island")
 music.download(output="531_dc_party_planning_island.mp3")
 ```
 
-## Calculators
+## Tools
+
+### Calculators
 
 ### Calculate elements strongs
 
 ```py
-from dcutils.calculators import calculate_strongs
+from dcutils.tools.calculators import calculate_strongs
 
 strongs = calculate_strongs(elements=["terra", "flame"])
 ```
@@ -101,7 +103,7 @@ strongs = calculate_strongs(elements=["terra", "flame"])
 ### Calculate elements weaknesses
 
 ```py
-from dcutils.calculators import calculate_weaknesses
+from dcutils.tools.calculators import calculate_weaknesses
 
 weaknesses = calculate_weaknesses(first_element="terra")
 ```
@@ -113,11 +115,59 @@ weaknesses = calculate_weaknesses(first_element="terra")
 ### Calculate orb recall gain
 
 ```py
-from dcutils.calculators import calculate_orb_recall_gain
+from dcutils.tools.calculators import calculate_orb_recall_gain
 
 orb_recall_gain = calculate_orb_recall_gain(dragon_level=15, dragon_stars=2)
 ```
 **Output:**
 ```
 389
+```
+
+### AI (Artificial Intelligence)
+
+#### Elements detector
+```py
+from dcutils.tools.ai.elements_detector import ElementsDetectorAI
+
+elements_detector = ElementsDetectorAI()
+
+elements_result = elements_detector.detect(image_path="ui_3110_dragon_hoardereternal_1@2x.png", limit=4)
+```
+**Output:**
+```
+[
+    {
+        "element": "ice",
+        "confidence_score": 0.4871271550655365   
+    },
+    {
+        "element": "nature",
+        "confidence_score": 0.296091228723526
+    },
+    {
+        "element": "flame",
+        "confidence_score": 0.16774502396583557
+    },
+    {
+        "element": "sea",
+        "confidence_score": 0.03868602588772774
+    }
+]
+```
+
+#### Phase detector
+```py 
+from dcutils.tools.ai.phase_detector import PhaseDetectorAI
+
+phase_detector = PhaseDetectorAI()
+
+phase_result = phase_detector.detect(image_path="ui_3110_dragon_hoardereternal_1@2x.png")
+```
+**Output:**
+```
+{
+    "phase": "baby",
+    "confidence_score": 0.9999938011169434
+}
 ```
