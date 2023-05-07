@@ -82,6 +82,10 @@ ELEMENTS_CONFIG = {
     "dream": {
         "strongs": ["happy", "chaos"],
         "weaknesses": []
+    },
+    "physical": {
+        "strongs": [],
+        "weaknesses": ["legend"]
     }
 }
 

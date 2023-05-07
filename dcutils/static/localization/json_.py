@@ -5,8 +5,8 @@ import httpx
 import json
 
 class Localization:
-    __localization_list: list
-    __localization_dict: dict
+    __list: list
+    __dict: dict
 
     @validate_arguments
     def __init__(
@@ -17,35 +17,36 @@ class Localization:
         ] = None
     ) -> None:
         if language:
-            self.__localization_list = self.fetch(language)
-            self.__localization_dict = FromDictList(self.__localization_list).merge_dicts()
+            self.__list = self.fetch(language)
+            self.__dict = FromDictList(self.__list).merge_dicts()
 
         elif loc:
             self.__load(loc)
 
     def __repr__(self) -> str:
-        return f"{self.__class__.__name__}({json.dumps(self.dict, indent=4)})"
+        return f"{self.__class__.__name__}({json.dumps(self.dict, indent=4)[:300]}" + "...})"
 
     def __str__(self) -> str:
         return self.__repr__()
 
-    @validate_arguments
-    def __getitem__(self, key: str) -> str:
-        result = self.get_value_from_key(key)
+    # >> Desativados temporariamente por conta de erros
+    # @validate_arguments
+    # def __getitem__(self, key: str) -> str:
+    #     result = self.get_value_from_key(key)
 
-        if result is None:
-            raise KeyError(key)
+    #     if result is None:
+    #         raise KeyError(key)
 
-        return result
+    #     return result
 
-    @validate_arguments
-    def __getattr__(self, name: str) -> str:
-        result = self.get_value_from_key(name)
+    # @validate_arguments
+    # def __getattr__(self, name: str) -> str:
+    #     result = self.get_value_from_key(name)
 
-        if result is None:
-            raise AttributeError(name)
+    #     if result is None:
+    #         raise AttributeError(name)
 
-        return result
+    #     return result
 
     @classmethod
     @validate_arguments
@@ -61,19 +62,19 @@ class Localization:
         type_ = type(loc)
 
         if type_ == list:
-            loc_obj._Localization__localization_list = loc
-            loc_obj._Localization__localization_dict = FromDictList(loc).merge_dicts()
+            loc_obj._Localization__list = loc
+            loc_obj._Localization__dict = FromDictList(loc).merge_dicts()
 
         elif type_ == dict:
-            loc_obj._Localization__localization_dict = loc
-            loc_obj._Localization__localization_list = []
+            loc_obj._Localization__dict = loc
+            loc_obj._Localization__list = []
 
             for key, value in loc.items():
                 dict_ = { key: value }
                 loc_obj._Localization__localization.append(dict_)
 
         else:
-            raise ValueError(f"{type_} is an invalid type to load a localization")
+            raise ValueError(f"'{type_}' is an invalid type to load a localization!")
 
         return loc_obj
 
@@ -84,10 +85,10 @@ class Localization:
         from_: str = "dict"
     ) -> None:
         if from_ == "dict":
-            data = self.__localization_dict
+            data = self.__dict
 
         elif from_ == "list":
-            data = self.__localization_list
+            data = self.__list
 
         else:
             ValueError()
@@ -108,36 +109,36 @@ class Localization:
         type_ = type(loc)
 
         if type_ == list:
-            self.__load_list(list(loc))
+            self.__load_list(loc)
 
         elif type_ == dict:
-            self.__load_dict(dict(loc))
+            self.__load_dict(loc)
 
         else:
             raise ValueError(f"{type_} is an invalid type to load a localization")
 
     @validate_arguments
     def __load_list(self, loc: list[dict]):
-        self.__localization_list = loc
-        self.__localization_dict = FromDictList(loc).merge_dicts()
+        self.__list = loc
+        self.__dict = FromDictList(loc).merge_dicts()
 
     @validate_arguments
     def __load_dict(self, loc: dict):
-        self.__localization_dict = loc
-        self.__localization_list = []
+        self.__dict = loc
+        self.__list = []
 
         for key, value in loc.items():
             dict_ = { key: value }
-            self.__localization_list.append(dict_)
+            self.__list.append(dict_)
 
     @validate_arguments
     def get_value_from_key(self, key: str) -> Optional[str]:
-        if key in self.__localization_dict.keys():
-            return self.__localization_dict[key]
+        if key in self.__dict.keys():
+            return self.__dict[key]
 
     @validate_arguments
     def get_key_from_value(self, value: str) -> Optional[str]:
-        for dict_key, dict_value in self.__localization_dict.items():
+        for dict_key, dict_value in self.__dict.items():
             if dict_value == value:
                 return dict_key
 
@@ -174,7 +175,7 @@ class Localization:
 
         results = []
 
-        for key in self.__localization_dict.keys():
+        for key in self.__dict.keys():
             parsed_key = (key
                 .lower()
                 .strip())
@@ -192,7 +193,7 @@ class Localization:
 
         results = []
 
-        for value in self.__localization_dict.values():
+        for value in self.__dict.values():
             parsed_value = (value
                 .lower()
                 .strip())
@@ -215,35 +216,45 @@ class Localization:
 
         new_fields = []
         edited_fields = []
+        deleted_fields = []
 
-        old_localization_keys = dict(old_localization).keys()
+        old_localization_keys = old_localization.keys()
 
-        for key in self.__localization_dict.keys():
+        for key in self.__dict.keys():
             if key not in old_localization_keys:
                 new_fields.append({
                     "key": key,
-                    "value": self.__localization_dict[key]
+                    "value": self.__dict[key]
                 })
 
         for key in old_localization_keys:
-            if old_localization[key] != self.__localization_dict[key]:
+            if key not in self.__dict:
+                deleted_fields.append({
+                    "key": key,
+                    "value": old_localization[key]
+                })
+
+            elif old_localization[key] != self.__dict[key]:
                 edited_fields.append({
                     "key": key,
-                    "old_value": old_localization[key],
-                    "new_value": self.__localization_dict[key]
+                    "values": {
+                        "new": old_localization[key],
+                        "old": self.__dict[key]
+                    }
                 })
 
         return dict(
             new_fields = new_fields,
-            edited_fields = edited_fields
+            edited_fields = edited_fields,
+            deleted_fields = deleted_fields
         )
 
     @property
     def list(self) -> list[dict[str, str]]:
-        return self.__localization_list
+        return self.__list or []
 
     @property
     def dict(self) -> dict[str, str]:
-        return self.__localization_dict
+        return self.__dict or {}
 
 __all__ = [ "Localization" ]

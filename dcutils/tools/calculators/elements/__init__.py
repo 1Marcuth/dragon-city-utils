@@ -16,7 +16,7 @@ def calculate_strongs(elements: list[str]) -> list[str]:
     return strongs
 
 @validate_arguments
-def calculate_weaknesses(first_element: str) -> list[str] | list:
+def calculate_weaknesses(first_element: str) -> list[str]:
     weaknesses = []
 
     for element in ELEMENTS_CONFIG.keys():

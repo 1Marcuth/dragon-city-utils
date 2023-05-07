@@ -169,7 +169,7 @@ result = DragonUrlParser.from_flash_animation("https://dci-static-s1.socialpoint
 ```py
 from dcutils.tools.url_parser.dragon import DragonUrlParser
 
-result = DragonUrlParser.fromspine_animation("https://dci-static-s1.socialpointgames.com/static/dragoncity/mobile/engine/version_1_1/dragons/1000_dragon_nature_3/1000_dragon_nature_skin1_3_HD_tweened_dxt5.zip")
+result = DragonUrlParser.fromspine_animation(url="https://dci-static-s1.socialpointgames.com/static/dragoncity/mobile/engine/version_1_1/dragons/1000_dragon_nature_3/1000_dragon_nature_skin1_3_HD_tweened_dxt5.zip")
 ```
 **Output:**
 ```
@@ -180,7 +180,7 @@ result = DragonUrlParser.fromspine_animation("https://dci-static-s1.socialpointg
 ```py
 from dcutils.tools.url_parser.dragon import DragonUrlParser
 
-result = DragonUrlParser.from_sprite("https://dci-static-s1.socialpointgames.com/static/dragoncity/mobile/ui/dragons/ui_1000_dragon_nature_skin1_3@2x.png")
+result = DragonUrlParser.from_sprite(url="https://dci-static-s1.socialpointgames.com/static/dragoncity/mobile/ui/dragons/ui_1000_dragon_nature_skin1_3@2x.png")
 ```
 **Output:**
 ```
@@ -191,7 +191,7 @@ result = DragonUrlParser.from_sprite("https://dci-static-s1.socialpointgames.com
 ```py
 from dcutils.tools.url_parser.dragon import DragonUrlParser
 
-result = DragonUrlParser.from_thumb("https://dci-static-s1.socialpointgames.com/static/dragoncity/mobile/ui/dragons/HD/thumb_1000_dragon_nature_skin1_3.png")
+result = DragonUrlParser.from_thumb(url="https://dci-static-s1.socialpointgames.com/static/dragoncity/mobile/ui/dragons/HD/thumb_1000_dragon_nature_skin1_3.png")
 ```
 **Output:**
 ```
@@ -202,7 +202,7 @@ result = DragonUrlParser.from_thumb("https://dci-static-s1.socialpointgames.com/
 ```py
 from dcutils.tools.url_parser.dragon import DragonUrlParser
 
-result = DragonUrlParser.get_id("https://dci-static-s1.socialpointgames.com/static/dragoncity/mobile/ui/dragons/HD/thumb_1000_dragon_nature_skin1_3.png")
+result = DragonUrlParser.get_id(url="https://dci-static-s1.socialpointgames.com/static/dragoncity/mobile/ui/dragons/HD/thumb_1000_dragon_nature_skin1_3.png")
 ```
 **Output:**
 ```
@@ -213,7 +213,7 @@ result = DragonUrlParser.get_id("https://dci-static-s1.socialpointgames.com/stat
 ```py
 from dcutils.tools.url_parser.dragon import DragonUrlParser
 
-result = DragonUrlParser.get_image_name("https://dci-static-s1.socialpointgames.com/static/dragoncity/mobile/ui/dragons/HD/thumb_1000_dragon_nature_skin1_3.png")
+result = DragonUrlParser.get_image_name(url="https://dci-static-s1.socialpointgames.com/static/dragoncity/mobile/ui/dragons/HD/thumb_1000_dragon_nature_skin1_3.png")
 ```
 **Output:**
 ```
@@ -224,7 +224,7 @@ result = DragonUrlParser.get_image_name("https://dci-static-s1.socialpointgames.
 ```py
 from dcutils.tools.url_parser.dragon import DragonUrlParser
 
-result = DragonUrlParser.get_image_qualitity("https://dci-static-s1.socialpointgames.com/static/dragoncity/mobile/ui/dragons/ui_1000_dragon_nature_skin1_3@2x.png")
+result = DragonUrlParser.get_image_qualitity(url="https://dci-static-s1.socialpointgames.com/static/dragoncity/mobile/ui/dragons/ui_1000_dragon_nature_skin1_3@2x.png")
 ```
 **Output:**
 ```
@@ -235,7 +235,7 @@ result = DragonUrlParser.get_image_qualitity("https://dci-static-s1.socialpointg
 ```py
 from dcutils.tools.url_parser.dragon import DragonUrlParser
 
-result = DragonUrlParser.get_phase("https://dci-static-s1.socialpointgames.com/static/dragoncity/mobile/ui/dragons/ui_1000_dragon_nature_skin1_3@2x.png")
+result = DragonUrlParser.get_phase(url="https://dci-static-s1.socialpointgames.com/static/dragoncity/mobile/ui/dragons/ui_1000_dragon_nature_skin1_3@2x.png")
 ```
 **Output:**
 ```
@@ -246,7 +246,7 @@ result = DragonUrlParser.get_phase("https://dci-static-s1.socialpointgames.com/s
 ```py
 from dcutils.tools.url_parser.dragon import DragonUrlParser
 
-result = DragonUrlParser.get_skin("https://dci-static-s1.socialpointgames.com/static/dragoncity/mobile/ui/dragons/ui_1000_dragon_nature_skin1_3@2x.png")
+result = DragonUrlParser.get_skin(url="https://dci-static-s1.socialpointgames.com/static/dragoncity/mobile/ui/dragons/ui_1000_dragon_nature_skin1_3@2x.png")
 ```
 **Output:**
 ```
