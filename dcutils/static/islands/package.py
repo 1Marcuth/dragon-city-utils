@@ -10,7 +10,7 @@ class IslandPackage(BaseStaticDownloader):
         filename = uri_splited[4]
 
         if type_ == "grid_islands":
-            filename.replace(".zip", "_optim.zip")
+            filename = filename.replace(".zip", "_optim.zip")
 
         self.url = f"https://www.socialpointgames.com/static/dragoncity/mobile/ui/{type_}/HD/dxt5/{filename}"
 
