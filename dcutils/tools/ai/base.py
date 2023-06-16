@@ -83,17 +83,14 @@ class BaseAI:
 
     def __delete_model_zip(self) -> None:
         logging.info(f"Deleting model zip from: {self.config.model_zip_file_path}")
-
         os.remove(self.config.model_zip_file_path)
 
     def __delete_model_file(self) -> None:
         logging.info(f"Deleting model from: {self.config.model_file_path}")
-
         os.remove(self.config.model_file_path)
 
     def __delete_labels_file(self) -> None:
         logging.info(f"Deleting labels from: {self.config.labels_file_path}")
-
         os.remove(self.config.labels_file_path)
 
     def update(self) -> None:

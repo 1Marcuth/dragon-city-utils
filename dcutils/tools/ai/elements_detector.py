@@ -7,11 +7,11 @@ from .base import BaseAI, BaseAIConfig
 class ElementsDetectorAI(BaseAI):
     def __init__(self) -> None:
         config = BaseAIConfig(
-            model_zip_url="https://cdn.discordapp.com/attachments/1061480758419664900/1099397120961822730/elements_detector_model.zip",
-            model_out_dir=".cache/ai_data/elements_detector/",
-            model_zip_filename="elements_detector_model.zip",
-            model_filename="keras_model.h5",
-            labels_filename="labels.txt"
+            model_zip_url = "https://cdn.discordapp.com/attachments/1061480758419664900/1099397120961822730/elements_detector_model.zip",
+            model_out_dir = ".cache/ai_data/elements_detector/",
+            model_zip_filename = "elements_detector_model.zip",
+            model_filename = "keras_model.h5",
+            labels_filename = "labels.txt"
         )
 
         super().__init__(config)
@@ -47,4 +47,4 @@ class ElementsDetectorAI(BaseAI):
 
         return results
 
-__all__ = [ "PhaseDetector" ]
+__all__ = [ "ElementsDetectorAI" ]

@@ -16,8 +16,6 @@ class GeneralMusic(BaseStaticDownloader):
             music_name = get_music_name_from_tag(tag)
 
         if not music_name:
-            print(tag)
-            print(music_name)
             raise ValueError("Please enter a valid song name! If you have entered a tag please check it as it was not possible to get a song name from it.")
 
         self.url = f"http://dci-static-s1.socialpointgames.com/static/dragoncity/mobile/sounds/music/{music_name}.mp3"

@@ -235,6 +235,7 @@ class BattleSimulator:
 
                         if current_entity2_index >= len(self.__teams[other_team_index]):
                             return dict(
+                                start_team_index = start_team_index,
                                 winner_index = start_team_index,
                                 shifts = shifts,
                                 living_dragons = [
@@ -266,6 +267,7 @@ class BattleSimulator:
 
                     if current_entity1_index >= len(self.__teams[start_team_index]):
                         return dict(
+                            start_team_index = start_team_index,
                             winner_index = other_team_index,
                             shifts = shifts,
                             living_dragons =  [
