@@ -1,4 +1,4 @@
-from pydantic import validate_arguments
+from pydantic import validate_call
 
 from .config import (
     category_9_dragons_hp_fix,
@@ -11,7 +11,7 @@ from .config import (
     damage_tower_power
 )
 
-@validate_arguments
+@validate_call
 def calculate_status(
     category: int,
     rarity: str,

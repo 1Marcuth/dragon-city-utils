@@ -1,4 +1,4 @@
-from pydantic import validate_arguments
+from pydantic import validate_call
 
 from .config import (
     ORB_RECALL_CONFIG,
@@ -8,7 +8,7 @@ from .config import (
     DRAGON_MAX_STARS
 )
 
-@validate_arguments
+@validate_call
 def calculate_recall_gain(dragon_level: int, dragon_stars: int) -> int:
     orbs_gain = 0
 

@@ -1,8 +1,8 @@
-from pydantic import validate_arguments
+from pydantic import validate_call
 
 from .config import ELEMENTS_CONFIG
 
-@validate_arguments
+@validate_call
 def calculate_strongs(elements: list[str]) -> list[str]:
     strongs = []
 
@@ -15,7 +15,7 @@ def calculate_strongs(elements: list[str]) -> list[str]:
 
     return strongs
 
-@validate_arguments
+@validate_call
 def calculate_weaknesses(first_element: str) -> list[str]:
     weaknesses = []
 

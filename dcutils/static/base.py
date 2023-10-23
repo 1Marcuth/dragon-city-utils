@@ -1,10 +1,10 @@
-from pydantic import validate_arguments
 from urllib.request import urlretrieve
+from pydantic import validate_call
 
 class BaseStaticDownloader:
     url: str
 
-    @validate_arguments
+    @validate_call
     def download(self, output: str):
         urlretrieve(self.url, output)
 

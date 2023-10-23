@@ -1,6 +1,6 @@
-from pydantic import validate_arguments
 from typing import Optional, Union, Any
 from pyfilter import FromDictList
+from pydantic import validate_call
 import httpx
 import json
 
@@ -8,7 +8,7 @@ class Localization:
     __list: list
     __dict: dict
 
-    @validate_arguments
+    @validate_call
     def __init__(
         self,
         language: Optional[str] = None,
@@ -30,7 +30,7 @@ class Localization:
         return self.__repr__()
 
     # >> Desativados temporariamente por conta de erros
-    # @validate_arguments
+    # @validate_call
     # def __getitem__(self, key: str) -> str:
     #     result = self.get_value_from_key(key)
 
@@ -39,7 +39,7 @@ class Localization:
 
     #     return result
 
-    # @validate_arguments
+    # @validate_call
     # def __getattr__(self, name: str) -> str:
     #     result = self.get_value_from_key(name)
 
@@ -49,14 +49,14 @@ class Localization:
     #     return result
 
     @classmethod
-    @validate_arguments
+    @validate_call
     def load_file(cls, file_path: str):
         with open(file_path, "r", encoding="utf-8") as file:
             loc = json.load(file)
             return Localization(loc=loc)
 
     @classmethod
-    @validate_arguments
+    @validate_call
     def load(cls, loc: Union[list, dict]):
         loc_obj = Localization()
         type_ = type(loc)
@@ -78,7 +78,7 @@ class Localization:
 
         return loc_obj
 
-    @validate_arguments
+    @validate_call
     def save_file(
         self,
         file_path: str,
@@ -104,7 +104,7 @@ class Localization:
         data = response.json()
         return data
 
-    @validate_arguments
+    @validate_call
     def __load(self, loc: Union[list, dict]):
         type_ = type(loc)
 
@@ -117,12 +117,12 @@ class Localization:
         else:
             raise ValueError(f"{type_} is an invalid type to load a localization")
 
-    @validate_arguments
+    @validate_call
     def __load_list(self, loc: list[dict]):
         self.__list = loc
         self.__dict = FromDictList(loc).merge_dicts()
 
-    @validate_arguments
+    @validate_call
     def __load_dict(self, loc: dict):
         self.__dict = loc
         self.__list = []
@@ -131,43 +131,43 @@ class Localization:
             dict_ = { key: value }
             self.__list.append(dict_)
 
-    @validate_arguments
+    @validate_call
     def get_value_from_key(self, key: str) -> Optional[str]:
         if key in self.__dict.keys():
             return self.__dict[key]
 
-    @validate_arguments
+    @validate_call
     def get_key_from_value(self, value: str) -> Optional[str]:
         for dict_key, dict_value in self.__dict.items():
             if dict_value == value:
                 return dict_key
 
-    @validate_arguments
+    @validate_call
     def get_dragon_name(self, id: int) -> Optional[str]:
         key = f"tid_unit_{id}_name"
         return self.get_value_from_key(key)
 
-    @validate_arguments
+    @validate_call
     def get_dragon_description(self, id: int) -> Optional[str]:
         key = f"tid_unit_{id}_description"
         return self.get_value_from_key(key)
 
-    @validate_arguments
+    @validate_call
     def get_attack_name(self, id: int) -> Optional[str]:
         key = f"tid_attack_name_{id}"
         return self.get_value_from_key(key)
 
-    @validate_arguments
+    @validate_call
     def get_skill_name(self, id: int) -> Optional[str]:
         key = f"tid_skill_name_{id}"
         return self.get_value_from_key(key)
 
-    @validate_arguments
+    @validate_call
     def get_skill_description(self, id: int) -> Optional[str]:
         key = f"tid_skill_description_{id}"
         return self.get_value_from_key(key)
 
-    @validate_arguments
+    @validate_call
     def search_keys(self, query: str) -> list[str]:
         query = (query
             .lower()
@@ -185,7 +185,7 @@ class Localization:
 
         return results
 
-    @validate_arguments
+    @validate_call
     def search_values(self, query: str) -> list[str] | list:
         query = (query
             .lower()
@@ -203,7 +203,7 @@ class Localization:
 
         return results
 
-    @validate_arguments
+    @validate_call
     def compare(
         self,
         old_localization: Any

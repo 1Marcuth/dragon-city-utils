@@ -1,6 +1,6 @@
-from pydantic import validate_arguments
+from pydantic import validate_call
 
-@validate_arguments
+@validate_call
 def calculate_feed_cost(
     start_level: int,
     end_level: int,

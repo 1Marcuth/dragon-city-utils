@@ -1,4 +1,4 @@
-from pydantic import validate_arguments
+from pydantic import validate_call
 import random
 
 from .config import (
@@ -8,7 +8,7 @@ from .config import (
     one_star_power
 )
 
-@validate_arguments
+@validate_call
 def calculate_attack_damage(
     category: int,
     level: int,

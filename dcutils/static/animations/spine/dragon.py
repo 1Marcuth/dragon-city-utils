@@ -1,11 +1,11 @@
-from pydantic import validate_arguments
+from pydantic import validate_call
 
 from ...base import BaseStaticDownloader
 
 WINDOWS = "dxt5"
 
 class DragonSpineAnimation(BaseStaticDownloader):
-    @validate_arguments
+    @validate_call
     def __init__(
         self,
         image_name: str,

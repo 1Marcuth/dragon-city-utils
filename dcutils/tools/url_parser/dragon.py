@@ -1,9 +1,9 @@
-from pydantic import validate_arguments
+from pydantic import validate_call
 import re
 
 class DragonUrlParser:
     @classmethod
-    @validate_arguments
+    @validate_call
     def get_image_name(cls, url: str) -> str | None:
         match = re.search(r"\/(basic_|thumb_|ui_)?(\d+)_([\w_]+)", url)
 
@@ -28,7 +28,7 @@ class DragonUrlParser:
             return image_name_without_skin
 
     @classmethod
-    @validate_arguments
+    @validate_call
     def get_id(cls, url: str) -> int | None:
         match = re.search(r"\/(basic_|thumb_|ui_)?(\d+)_", url)
 
@@ -37,7 +37,7 @@ class DragonUrlParser:
             return id
     
     @classmethod
-    @validate_arguments
+    @validate_call
     def get_phase(cls, url: str) -> int | None:
         match = re.search(r"(\d+)@2x\.(png|swf)|(\d+)\.(png|swf)|(\d+)_HD_tweened_dxt5.zip|(\d+)_HD_spine-3-8-59_dxt5.zip", url)
 
@@ -51,7 +51,7 @@ class DragonUrlParser:
             return phase
 
     @classmethod
-    @validate_arguments
+    @validate_call
     def get_skin(cls, url: str) -> str | None:
         match = re.search(r"_skin\d+", url)
 
@@ -60,7 +60,7 @@ class DragonUrlParser:
             return skin
 
     @classmethod
-    @validate_arguments
+    @validate_call
     def get_image_qualitity(cls, url: str) -> str:
         match = re.search(r"@\d+x", url)
 
@@ -71,7 +71,7 @@ class DragonUrlParser:
         return ""
 
     @classmethod
-    @validate_arguments
+    @validate_call
     def from_sprite(cls, url: str) -> dict:
         return dict(
             id = cls.get_id(url),
@@ -82,7 +82,7 @@ class DragonUrlParser:
         )
 
     @classmethod
-    @validate_arguments
+    @validate_call
     def from_thumb(cls, url: str) -> dict:
         return dict(
             id = cls.get_id(url),
@@ -92,7 +92,7 @@ class DragonUrlParser:
         )
 
     @classmethod
-    @validate_arguments
+    @validate_call
     def from_flash_animation(cls, url: str) -> dict:
         return dict(
             id = cls.get_id(url),
@@ -102,7 +102,7 @@ class DragonUrlParser:
         )
 
     @classmethod
-    @validate_arguments
+    @validate_call
     def from_spine_animation(cls, url: str) -> dict:
         return dict(
             id = cls.get_id(url),

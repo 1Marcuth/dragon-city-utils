@@ -1,4 +1,4 @@
-from pydantic import validate_arguments
+from pydantic import validate_call
 from PIL import Image, ImageOps
 import numpy as np
 
@@ -16,7 +16,7 @@ class PhaseDetectorAI(BaseAI):
 
         super().__init__(config)
     
-    @validate_arguments
+    @validate_call
     def detect(self, image_path: str) -> list[dict]:
         image_size = (224, 224)
 

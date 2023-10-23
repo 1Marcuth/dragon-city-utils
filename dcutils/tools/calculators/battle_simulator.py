@@ -1,4 +1,4 @@
-from pydantic import validate_arguments
+from pydantic import validate_call
 from pyfilter.tuple_list import FromTupleList
 from rich import print
 import random
@@ -83,7 +83,7 @@ class Entity:
         self.attacks = attacks
         self.current_hp = int(hp)
 
-    @validate_arguments
+    @validate_call
     def attack(self, entity, attack: tuple[str, int]):
         attack_element, attack_power = attack
 
@@ -129,7 +129,7 @@ class Entity:
             damage_type = damage_type
         )
 
-    @validate_arguments
+    @validate_call
     def take_damage(self, damage: int):
         self.current_hp -= damage
 
@@ -140,7 +140,7 @@ class Entity:
     def is_alive(self) -> bool:
         return self.current_hp > 0
 
-@validate_arguments
+@validate_call
 def process_entity(
     category: int,
     rarity: str,
@@ -183,7 +183,7 @@ def process_entity(
     return entity
 
 class BattleSimulator:
-    @validate_arguments
+    @validate_call
     def __init__(
         self,
         team1_data: list[dict],
@@ -195,7 +195,7 @@ class BattleSimulator:
         self.__teams = [team1, team2]
         self.__team_that_starts_index = random.randint(0, 1)
 
-    @validate_arguments
+    @validate_call
     def simulate_battle(
         self,
         simulation_type: int = SimulationTypes.NORMAL

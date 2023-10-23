@@ -1,5 +1,5 @@
 from urllib.request import urlretrieve, build_opener, install_opener
-from pydantic import validate_arguments
+from pydantic import validate_call
 from zipfile import ZipFile
 import tensorflow as tf
 import numpy as np
@@ -7,7 +7,7 @@ import pathutil
 import logging
 import os
 
-@validate_arguments
+@validate_call
 def load_labels(file_path: str) -> list[str]:
     with open(file_path, "r") as file:
         lables = [ line.strip() for line in file.readlines() ]
@@ -42,7 +42,7 @@ class BaseAIConfig:
         return os.path.join(self.model_out_dir, self.labels_filename)
 
 class BaseAI:
-    @validate_arguments(config=dict(arbitrary_types_allowed=True))
+    @validate_call(config=dict(arbitrary_types_allowed=True))
     def __init__(self, config: BaseAIConfig) -> None:
         self.config = config
 
