@@ -1,6 +1,6 @@
 from typing import Optional, Union, Any, Self
 from pydantic import validate_call
-from pyfilter import FromDictList
+from pyfilter import DictListFilter
 import httpx
 import json
 
@@ -28,7 +28,7 @@ class Localization:
     ) -> None:
         if language:
             self.__list: LocalizationList = self.fetch(language)
-            self.__dict: LocalizationDict = FromDictList(self.__list).merge_dicts()
+            self.__dict: LocalizationDict = DictListFilter(self.__list).merge_dicts()
 
         elif loc:
             self.__load(loc)
@@ -73,7 +73,7 @@ class Localization:
 
         if object_type == list:
             loc_obj._Localization__list = loc
-            loc_obj._Localization__dict = FromDictList(loc).merge_dicts()
+            loc_obj._Localization__dict = DictListFilter(loc).merge_dicts()
 
         elif object_type == dict:
             loc_obj._Localization__dict = loc
@@ -148,7 +148,7 @@ class Localization:
     @validate_call
     def __load_list(self, loc: list[dict]):
         self.__list = loc
-        self.__dict = FromDictList(loc).merge_dicts()
+        self.__dict = DictListFilter(loc).merge_dicts()
 
     @validate_call
     def __load_dict(self, loc: dict):
@@ -237,7 +237,7 @@ class Localization:
         old_localization: Any
     ) -> dict[str, list]:
         if isinstance(old_localization, list):
-            old_localization = FromDictList(old_localization).merge_dicts()
+            old_localization = DictListFilter(old_localization).merge_dicts()
 
         elif not isinstance(old_localization, dict):
             old_localization = old_localization.dict

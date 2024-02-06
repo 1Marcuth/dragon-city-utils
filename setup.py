@@ -5,13 +5,13 @@ with open("README.md", "r", encoding = "utf-8") as file:
 
 setup(
     name = "dragon-city-utils",
-    version = "2.0.0",
+    version = "2.0.3",
     license = "MIT License",
     author = "Marcuth",
     long_description = readme_content,
     long_description_content_type = "text/markdown",
     author_email = "example@gmail.com",
     keywords = "dragoncity dcutils tools",
-    description = "Dragon City Utils, uma coleção de ferramentas e utilitários para gerenciar ativos estáticos e realizar cálculos relacionados ao jogo Dragon City.",
+    description = "Dragon City Utils, a collection of tools and utilities for managing static assets and performing calculations related to the Dragon City game.",
     packages = ["dcutils"] + [ "dcutils/" + x for x in find_packages("dcutils") ]
 )
