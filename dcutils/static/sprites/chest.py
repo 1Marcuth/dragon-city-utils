@@ -1,5 +1,6 @@
 from pydantic import validate_call
 
+from ..platform_prefixes import PlatformPrefixes
 from ..base import BaseStaticDownloader
 
 class ChestSprite(BaseStaticDownloader):
@@ -7,7 +8,8 @@ class ChestSprite(BaseStaticDownloader):
     def __init__(
         self,
         image_name: str,
-        image_quality: int = 1
+        image_quality: int = 1,
+        platform_prefix: str = PlatformPrefixes.IOS
     ) -> None:
         if image_quality == 1:
             image_quality_str = ""
@@ -18,6 +20,6 @@ class ChestSprite(BaseStaticDownloader):
         else:
             raise ValueError(f"{image_quality} Not a valid number for image quality of a chest. Choose a number between 1 and 2")
         
-        self.url = f"https://dci-static-s1.socialpointgames.com/static/dragoncity/mobile/ui/chests/ui_{image_name}{image_quality_str}.png"
+        self.url = f"https://{platform_prefix}-static-s1.socialpointgames.com/static/dragoncity/mobile/ui/chests/ui_{image_name}{image_quality_str}.png"
 
 __all__ = [ "ChestSprite" ]

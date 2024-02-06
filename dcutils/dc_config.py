@@ -6,6 +6,4 @@ DRAGON_ELEMENTS_TYPES = {
     "so": "soul", "pr": "primal", "wd": "wind","ti": "time"
 }
 
-__all__ = [
-    "DRAGON_ELEMENTS_TYPES"
-]
+__all__ = [ "DRAGON_ELEMENTS_TYPES" ]

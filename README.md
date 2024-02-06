@@ -1,33 +1,38 @@
-# Soon to be documented, enjoy for now and install to discover the tools
+# dragon-city-utils
 
-## Download static files
+Welcome to the documentation of Dragon City Utils, a collection of tools and utilities for managing static assets and performing calculations related to the game Dragon City. Below, you'll find detailed explanations and code snippets for various functionalities.
+
+## Static Files
 
 ### Sprites
 
-#### Dragon sprite
+#### Dragon Sprite
 
-```py
+You can download a dragon sprite using the following code:
+
+```python
 from dcutils.static.sprites import DragonSprite
 
 dragon_sprite = DragonSprite(
-    image_name="1000_dragon_nature",
-    phase=3,
-    skin=1,
-    image_quality=2
+    image_name = "1000_dragon_nature",
+    phase = 3,
+    skin = "skin1",
+    image_quality = 2
 )
 
 dragon_sprite.download(output="dragon_nature_sprite.png")
 ```
+#### Dragon Thumb
 
-#### Dragon thumb
+To download a dragon thumb:
 
-```py
+```python
 from dcutils.static.sprites import DragonThumb
 
 dragon_thumb = DragonThumb(
-    image_name="1000_dragon_nature",
-    phase=3,
-    skin=1
+    image_name = "1000_dragon_nature",
+    phase = 3,
+    skin = "skin1"
 )
 
 dragon_thumb.download(output="dragon_nature_thumb.png")
@@ -37,13 +42,15 @@ dragon_thumb.download(output="dragon_nature_thumb.png")
 
 #### Dragon Animation (Flash Animation)
 
-```py
-from dcutils.static.animations import DragonSpineAnimation
+To download a dragon flash animation:
+
+```python
+from dcutils.static.animations import DragonFlashAnimation
 
 dragon_flash_animation = DragonFlashAnimation(
-    image_name="1000_dragon_nature",
-    phase=3,
-    skin=1
+    image_name = "1000_dragon_nature",
+    phase = 3,
+    skin = "skin1"
 )
 
 dragon_flash_animation.download(output="dragon_nature_flash_animation.swf")
@@ -51,58 +58,65 @@ dragon_flash_animation.download(output="dragon_nature_flash_animation.swf")
 
 #### Dragon Animation (Spine Animation)
 
-```py
+To download a dragon spine animation:
+
+```python
 from dcutils.static.animations import DragonSpineAnimation
 
 dragon_spine_animation = DragonSpineAnimation(
-    image_name="1000_dragon_nature",
-    phase=3,
-    skin=1
+    image_name = "1000_dragon_nature",
+    phase = 3,
+    skin = 1
 )
 
 dragon_spine_animation.download(output="dragon_spine_animation.zip")
 ```
 
-### Island packages
+### Island Packages
 
-```py
+To download an island package:
+
+```python
 from dcutils.static.islands import IslandPackage
 
-island_package = IslandPackage(uri="/mobile/ui/heroicraces_islands/hr_71_heroicorigins.zip")
+island_package = IslandPackage(uri = "/mobile/ui/heroicraces_islands/hr_71_heroicorigins.zip")
 
-island_package.download(output="island_package.zip")
+island_package.download(output = "island_package.zip")
 ```
 
 ### Sounds
 
-#### Musics
-```py
+#### Music
+
+To download music:
+
+```python
 from dcutils.static.sounds import GeneralMusic
 
-music = GeneralMusic(music_name="531_dc_party_planning_island")
+music = GeneralMusic(music_name = "531_dc_party_planning_island")
 
-music.download(output="531_dc_party_planning_island.mp3")
+music.download(output = "531_dc_party_planning_island.mp3")
 ```
 
 ## Tools
 
 ### Calculators
 
-### Calculate elements strongs
+#### Calculate Element Strengths
 
-```py
+```python
 from dcutils.tools.calculators import calculate_strongs
 
-strongs = calculate_strongs(elements=["terra", "flame"])
+strongs = calculate_strongs(elements = ["terra", "flame"])
 ```
 **Output:**
 ```
 ['electric', 'flame', 'nature', 'ice']
 ```
 
-### Calculate elements weaknesses
+#### Calculate Element Weaknesses
 
-```py
+```python
 from dcutils.tools.calculators import calculate_weaknesses
 
 weaknesses = calculate_weaknesses(first_element="terra")
@@ -112,35 +126,74 @@ weaknesses = calculate_weaknesses(first_element="terra")
 ['metal', 'war']
 ```
 
-### Calculate orb recall gain
+#### Calculate Orb Recall Gain
 
-```py
+```python
 from dcutils.tools.calculators import calculate_orb_recall_gain
 
-orb_recall_gain = calculate_orb_recall_gain(dragon_level=15, dragon_stars=2)
+orb_recall_gain = calculate_orb_recall_gain(dragon_level = 15, dragon_stars = 2)
 ```
 **Output:**
 ```
 389
 ```
 
+### Calculate Attack Damage
+
+You can calculate attack damage using the `calculate_attack_damage` function.
+
+```python
+from dcutils.tools.calculators.dragon import calculate_attack_damage
+
+damage_info = calculate_attack_damage(
+    category = 1,
+    level = 50,
+    attack_power=  1000,
+    rank_class = 3,
+    stars = 2
+)
+```
+
+### Calculate
+
+You can calculate dragon status using the `calculate_status` function.
+
+```python
+from dcutils.tools.calculators.dragon import calculate_status
+
+status_info = calculate_status(
+    category = 1,
+    rarity = "R",
+    level = 50,
+    rank_class = 3,
+    stars = 2,
+    hp_runes = 5,
+    damage_runes = 3,
+    with_tower_bonus = True,
+    extra_hp_multiplier=  0.1,
+    extra_damage_multiplier = 0.05
+)
+```
+
 ### AI (Artificial Intelligence)
 
-#### Elements detector
-```py
+#### Elements Detector
+
+```python
 from dcutils.tools.ai.elements_detector import ElementsDetectorAI
 
 elements_detector = ElementsDetectorAI()
 
-elements_result = elements_detector.detect(image_path="ui_3110_dragon_hoardereternal_1@2x.png", limit=4)
+elements_result = elements_detector.detect(image_path = "ui_3110_dragon_hoardereternal_1@2x.png", limit = 4)
 ```
 **Output:**
 ```
 [{'element': 'ice', 'confidence_score': 0.4871271550655365}, {'element': 'nature', 'confidence_score': 0.296091228723526}, {'element': 'flame', 'confidence_score': 0.16774502396583557}, {'element': 'sea', 'confidence_score': 0.03868602588772774}]
 ```
 
-#### Phase detector
-```py 
+#### Phase Detector
+
+```python 
 from dcutils.tools.ai.phase_detector import PhaseDetectorAI
 
 phase_detector = PhaseDetectorAI()
@@ -152,103 +205,173 @@ phase_result = phase_detector.detect(image_path="ui_3110_dragon_hoardereternal_1
 {'phase': 'baby', 'confidence_score': 0.9999938011169434}
 ```
 
-### Url parser
+### URL Parser
 
-#### From flash animation
-```py
+#### Dragon URL Parser
+
+You can parse various information from Dragon URLs:
+
+```python
 from dcutils.tools.url_parser.dragon import DragonUrlParser
 
-result = DragonUrlParser.from_flash_animation("https://dci-static-s1.socialpointgames.com/static/dragoncity/assets/sprites/1000_dragon_nature_skin1_3.swf")
-```
-**Output:**
-```
-{'id': 1000, 'image_name': '1000_dragon_nature', 'phase': 3, 'skin': 'skin1'}
+# Example URLs
+url_flash_animation = "https://dci-static-s1.socialpointgames.com/static/dragoncity/assets/sprites/1000_dragon_nature_skin1_3.swf"
+url_spine_animation = "https://dci-static-s1.socialpointgames.com/static/dragoncity/mobile/engine/version_1_1/dragons/1000_dragon_nature_3/1000_dragon_nature_skin1_3_HD_tweened_dxt5.zip"
+url_sprite = "https://dci-static-s1.socialpointgames.com/static/dragoncity/mobile/ui/dragons/ui_1000_dragon_nature_skin1_3@2x.png"
+url_thumb = "https://dci-static-s1.socialpointgames.com/static/dragoncity/mobile/ui/dragons/HD/thumb_1000_dragon_nature_skin1_3.png"
+
+# Parse from URLs
+result_flash_animation = DragonUrlParser.from_flash_animation(url_flash_animation)
+result_spine_animation = DragonUrlParser.from_spine_animation(url_spine_animation)
+result_sprite = DragonUrlParser.from_sprite(url_sprite)
+result_thumb = DragonUrlParser.from_thumb(url_thumb)
+
+# Get specific information
+dragon_id = DragonUrlParser.get_id(url_thumb)
+image_name = DragonUrlParser.get_image_name(url_thumb)
+image_quality = DragonUrlParser.get_image_quality(url_sprite)
+phase = DragonUrlParser.get_phase(url_sprite)
+skin = DragonUrlParser.get_skin(url_sprite)
 ```
 
-#### From spine atimation
-```py
-from dcutils.tools.url_parser.dragon import DragonUrlParser
+Each function returns relevant information parsed from the given Dragon URL.
 
-result = DragonUrlParser.fromspine_animation(url="https://dci-static-s1.socialpointgames.com/static/dragoncity/mobile/engine/version_1_1/dragons/1000_dragon_nature_3/1000_dragon_nature_skin1_3_HD_tweened_dxt5.zip")
-```
-**Output:**
-```
-{'id': 1000, 'image_name': '1000_dragon_nature', 'phase': 3, 'skin': 'skin1'}
-```
+Feel free to explore these functionalities and integrate them into your projects!
 
-#### From sprite
-```py
-from dcutils.tools.url_parser.dragon import DragonUrlParser
+## Localization
 
-result = DragonUrlParser.from_sprite(url="https://dci-static-s1.socialpointgames.com/static/dragoncity/mobile/ui/dragons/ui_1000_dragon_nature_skin1_3@2x.png")
-```
-**Output:**
-```
-{'id': 1000, 'image_name': '1000_dragon_nature', 'phase': 3, 'skin': 'skin1', 'image_qualitity': '@2x'}
+The `Localization` class allows you to handle localization data efficiently. You can load localization from files, fetch it from an endpoint, and perform various operations on the data.
+
+```python
+from dcutils.static.localization import Localization
+
+# Example usage
+loc = Localization(language = "en")
+print(loc)
 ```
 
-#### From thumb
-```py
-from dcutils.tools.url_parser.dragon import DragonUrlParser
+### Methods
 
-result = DragonUrlParser.from_thumb(url="https://dci-static-s1.socialpointgames.com/static/dragoncity/mobile/ui/dragons/HD/thumb_1000_dragon_nature_skin1_3.png")
-```
-**Output:**
-```
-{'id': 1000, 'image_name': '1000_dragon_nature', 'phase': 3, 'skin': 'skin1'}
-```
+#### load_file
 
-#### Get id from anyone
-```py
-from dcutils.tools.url_parser.dragon import DragonUrlParser
+Load localization data from a file.
 
-result = DragonUrlParser.get_id(url="https://dci-static-s1.socialpointgames.com/static/dragoncity/mobile/ui/dragons/HD/thumb_1000_dragon_nature_skin1_3.png")
-```
-**Output:**
-```
-1000
+```python
+loc = Localization.load_file(file_path = "localization.json")
 ```
 
-#### Get image name from anyone
-```py
-from dcutils.tools.url_parser.dragon import DragonUrlParser
+#### load_compressed_file
 
-result = DragonUrlParser.get_image_name(url="https://dci-static-s1.socialpointgames.com/static/dragoncity/mobile/ui/dragons/HD/thumb_1000_dragon_nature_skin1_3.png")
-```
-**Output:**
-```
-1000_dragon_nature
+Load compressed localization data from a file.
+
+```python
+loc = Localization.load_compressed_file(file_path = "localization.gz")
 ```
 
-#### Get image qualitity from anyone
-```py
-from dcutils.tools.url_parser.dragon import DragonUrlParser
+#### fetch
 
-result = DragonUrlParser.get_image_qualitity(url="https://dci-static-s1.socialpointgames.com/static/dragoncity/mobile/ui/dragons/ui_1000_dragon_nature_skin1_3@2x.png")
-```
-**Output:**
-```
-@2x
+Fetch localization data from an endpoint.
+
+```python
+loc_data = Localization.fetch(language = "en")
 ```
 
-#### Get phase from anyone
-```py
-from dcutils.tools.url_parser.dragon import DragonUrlParser
+#### get_value_from_key
 
-result = DragonUrlParser.get_phase(url="https://dci-static-s1.socialpointgames.com/static/dragoncity/mobile/ui/dragons/ui_1000_dragon_nature_skin1_3@2x.png")
-```
-**Output:**
-```
-3
+Get the value from a key in the localization data.
+
+```python
+value = loc.get_value_from_key("key_name")
 ```
 
-#### Get skin from anyone
-```py
-from dcutils.tools.url_parser.dragon import DragonUrlParser
+#### get_key_from_value
 
-result = DragonUrlParser.get_skin(url="https://dci-static-s1.socialpointgames.com/static/dragoncity/mobile/ui/dragons/ui_1000_dragon_nature_skin1_3@2x.png")
+Get the key from a value in the localization data.
+
+```python
+key = loc.get_key_from_value("value_name")
 ```
-**Output:**
+
+#### get_dragon_name
+
+Get the name of a dragon based on its ID.
+
+```python
+name = loc.get_dragon_name(id = 1000)
 ```
-skin1
+
+#### get_dragon_description
+
+Get the description of a dragon based on its ID.
+
+```python
+description = loc.get_dragon_description(id = 1000)
 ```
+
+#### get_attack_name
+
+Get the name of an attack based on its ID.
+
+```python
+name = loc.get_attack_name(id = 1)
+```
+
+#### get_skill_name
+
+Get the name of a skill based on its ID.
+
+```python
+name = loc.get_skill_name(id = 1)
+```
+
+#### get_skill_description
+
+Get the description of a skill based on its ID.
+
+```python
+description = loc.get_skill_description(id = 1)
+```
+
+#### search_keys
+
+Search for keys containing a specific query.
+
+```python
+keys = loc.search_keys(query = "search_query")
+```
+
+#### search_values
+
+Search for values containing a specific query.
+
+```python
+values = loc.search_values(query = "search_query")
+```
+
+#### compare
+
+Compare the current localization data with old localization data.
+
+```python
+comparison = loc.compare(old_localization = old_loc)
+```
+
+### Properties
+
+#### list
+
+Get the localization data as a list.
+
+```python
+loc_list = loc.list
+```
+
+#### dict
+
+Get the localization data as a dictionary.
+
+```python
+loc_dict = loc.dict
+```
+
+Feel free to explore these functionalities and integrate them into your projects!

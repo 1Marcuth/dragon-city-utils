@@ -1,8 +1,18 @@
-from typing import Optional, Union, Any
-from pyfilter import FromDictList
+from typing import Optional, Union, Any, Self
 from pydantic import validate_call
+from pyfilter import FromDictList
 import httpx
 import json
+
+from ..._utils.file import (
+    write_json_file,
+    read_json_file,
+    write_compressed_json_file,
+    read_compressed_json_file
+)
+
+LocalizationDict = dict[str, str]
+LocalizationList = list[LocalizationDict]
 
 class Localization:
     __list: list
@@ -17,8 +27,8 @@ class Localization:
         ] = None
     ) -> None:
         if language:
-            self.__list = self.fetch(language)
-            self.__dict = FromDictList(self.__list).merge_dicts()
+            self.__list: LocalizationList = self.fetch(language)
+            self.__dict: LocalizationDict = FromDictList(self.__list).merge_dicts()
 
         elif loc:
             self.__load(loc)
@@ -47,25 +57,25 @@ class Localization:
     #         raise AttributeError(name)
 
     #     return result
+    # >>
 
     @classmethod
     @validate_call
-    def load_file(cls, file_path: str):
-        with open(file_path, "r", encoding="utf-8") as file:
-            loc = json.load(file)
-            return Localization(loc=loc)
+    def load_file(cls, file_path: str, encoding: str = "utf-8") -> Self:
+        loc = read_json_file(file_path, encoding = encoding)
+        return cls(loc = loc)
 
     @classmethod
     @validate_call
-    def load(cls, loc: Union[list, dict]):
-        loc_obj = Localization()
-        type_ = type(loc)
+    def load(cls, loc: Union[list, dict]) -> Self:
+        loc_obj = cls()
+        object_type = type(loc)
 
-        if type_ == list:
+        if object_type == list:
             loc_obj._Localization__list = loc
             loc_obj._Localization__dict = FromDictList(loc).merge_dicts()
 
-        elif type_ == dict:
+        elif object_type == dict:
             loc_obj._Localization__dict = loc
             loc_obj._Localization__list = []
 
@@ -74,7 +84,7 @@ class Localization:
                 loc_obj._Localization__localization.append(dict_)
 
         else:
-            raise ValueError(f"'{type_}' is an invalid type to load a localization!")
+            raise ValueError(f"'{object_type}' is an invalid type to load a localization!")
 
         return loc_obj
 
@@ -93,8 +103,26 @@ class Localization:
         else:
             ValueError()
 
-        with open(file_path, "w+", encoding="utf-8") as file:
-            json.dump(data, file)
+        write_json_file(file_path, data)
+
+    @validate_call
+    def save_compressed_file(
+        self,
+        file_path: str,
+        encoding: str = "utf-8",
+        indent: Optional[int] = None
+    ) -> None:
+        write_compressed_json_file(file_path, self.dict, indent, encoding)
+
+    @classmethod
+    @validate_call
+    def load_compressed_file(
+        cls,
+        file_path: str,
+        encoding: str = "utf-8"
+    ) -> Self:
+        loc = read_compressed_json_file(file_path, encoding)
+        return cls(loc = loc)
 
     @classmethod
     def fetch(cls, language: str) -> list[dict[str, str]]:
@@ -250,11 +278,11 @@ class Localization:
         )
 
     @property
-    def list(self) -> list[dict[str, str]]:
+    def list(self) -> LocalizationList:
         return self.__list or []
 
     @property
-    def dict(self) -> dict[str, str]:
+    def dict(self) -> LocalizationDict:
         return self.__dict or {}
 
 __all__ = [ "Localization" ]

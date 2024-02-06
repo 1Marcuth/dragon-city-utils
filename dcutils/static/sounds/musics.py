@@ -1,7 +1,7 @@
 from typing import Optional
 
-from ..base import BaseStaticDownloader
 from .config import get_music_name_from_tag
+from ..base import BaseStaticDownloader
 
 class GeneralMusic(BaseStaticDownloader):
     def __init__(

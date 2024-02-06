@@ -8,7 +8,7 @@ class PhaseDetectorAI(BaseAI):
     def __init__(self) -> None:
         config = BaseAIConfig(
             model_zip_url = "https://cdn.discordapp.com/attachments/1057469643402526781/1099397032805933148/phase_detector_model.zip",
-            model_out_dir = ".cache/ai_data/phase_detector/",
+            model_out_dir = ".dcutils/ai_data/phase_detector/",
             model_zip_filename = "phase_detector_model.zip",
             model_filename = "keras_model.h5",
             labels_filename = "labels.txt"
@@ -17,7 +17,7 @@ class PhaseDetectorAI(BaseAI):
         super().__init__(config)
     
     @validate_call
-    def detect(self, image_path: str) -> list[dict]:
+    def detect(self, image_path: str) -> dict:
         image_size = (224, 224)
 
         image = Image.open(image_path).convert("RGB")
