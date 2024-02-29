@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "dragon-city-utils"
+version = "2.1.0"
+description = "Dragon City Utils, a collection of tools and utilities for managing static assets and performing calculations related to the Dragon City game."
+authors = ["Marcuth <example@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+pydantic = "^2.6.3"
+httpx = "^0.27.0"
+tensorflow = "^2.15.0.post1"
+keras = "^3.0.5"
+python-filter = "^2.0.6"
+python-pathutil = "^0.0.0.0.2"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
