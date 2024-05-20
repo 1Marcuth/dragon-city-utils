@@ -23,5 +23,3 @@ class DragonFlashAnimation(BaseStaticDownloader):
             skin = ""
 
         self.url = f"https://{platform_prefix}-static-s1.socialpointgames.com/static/dragoncity/assets/sprites/{image_name}{skin}_{phase}.swf"
-
-__all__ = [ "DragonFlashAnimation" ]

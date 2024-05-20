@@ -5,7 +5,7 @@ with open("README.md", "r", encoding = "utf-8") as file:
 
 setup(
     name = "dragon-city-utils",
-    version = "2.0.3",
+    version = "2.1.0",
     license = "MIT License",
     author = "Marcuth",
     long_description = readme_content,

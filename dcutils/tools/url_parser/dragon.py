@@ -110,5 +110,3 @@ class DragonUrlParser:
             phase = cls.get_phase(url),
             skin = cls.get_skin(url)
         )
-
-__all__ = [ "DragonUrlParser" ]

@@ -88,5 +88,3 @@ ELEMENTS_CONFIG = {
         "weaknesses": ["legend"]
     }
 }
-
-__all__ = [ "ELEMENTS_CONFIG" ]

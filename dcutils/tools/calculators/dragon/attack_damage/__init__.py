@@ -48,5 +48,3 @@ def calculate_attack_damage(
         average = average,
         random = random_damage
     )
-
-__all__ = [ "calculate_attack_damage" ]

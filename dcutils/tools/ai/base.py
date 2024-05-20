@@ -15,6 +15,7 @@ def load_labels(file_path: str) -> list[str]:
     return lables
 
 class BaseAIConfig:
+    @validate_call
     def __init__(
         self,
         model_zip_url: str,
@@ -47,13 +48,13 @@ class BaseAI:
         self.config = config
 
         if not os.path.exists(config.model_file_path) or not os.path.exists(config.labels_file_path):
-            self.__download_model_zip()
-            self.__unzip_model_zip()
-            self.__delete_model_zip()
+            self._download_model_zip()
+            self._unzip_model_zip()
+            self._delete_model_zip()
 
-        self.__load_model()
+        self._load_model()
 
-    def __load_model(self):
+    def _load_model(self):
         logging.info(f"Loading '{self.__class__.__name__}' ai model")
 
         np.set_printoptions(suppress=True)
@@ -63,7 +64,7 @@ class BaseAI:
 
         self.data = np.ndarray(shape=(1, 224, 224, 3), dtype=np.float32)
 
-    def __download_model_zip(self) -> None:
+    def _download_model_zip(self) -> None:
         logging.info(f"Downloading model AI from: {self.config.model_zip_url}")
 
         if not os.path.exists(self.config.model_out_dir):
@@ -75,32 +76,30 @@ class BaseAI:
 
         urlretrieve(self.config.model_zip_url, self.config.model_zip_file_path)
 
-    def __unzip_model_zip(self) -> None:
+    def _unzip_model_zip(self) -> None:
         logging.info(f"Extracting model from: {self.config.model_zip_file_path}")
 
         with ZipFile(self.config.model_zip_file_path, "r") as file:
             file.extractall(self.config.model_out_dir)
 
-    def __delete_model_zip(self) -> None:
+    def _delete_model_zip(self) -> None:
         logging.info(f"Deleting model zip from: {self.config.model_zip_file_path}")
         os.remove(self.config.model_zip_file_path)
 
-    def __delete_model_file(self) -> None:
+    def _delete_model_file(self) -> None:
         logging.info(f"Deleting model from: {self.config.model_file_path}")
         os.remove(self.config.model_file_path)
 
-    def __delete_labels_file(self) -> None:
+    def _delete_labels_file(self) -> None:
         logging.info(f"Deleting labels from: {self.config.labels_file_path}")
         os.remove(self.config.labels_file_path)
 
     def update(self) -> None:
         logging.info(f"Updating the model: {self.__class__.__name__}")
         
-        self.__delete_model_file()
-        self.__delete_labels_file()
-        self.__download_model_zip()
-        self.__unzip_model_zip()
-        self.__delete_model_zip()
-        self.__load_model()
-
-__all__ = [ "BaseAI", "BaseAIConfig" ]
+        self._delete_model_file()
+        self._delete_labels_file()
+        self._download_model_zip()
+        self._unzip_model_zip()
+        self._delete_model_zip()
+        self._load_model()

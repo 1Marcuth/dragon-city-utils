@@ -13,5 +13,3 @@ class IslandPackage(BaseStaticDownloader):
             filename = filename.replace(".zip", "_optim.zip")
 
         self.url = f"https://www.socialpointgames.com/static/dragoncity/mobile/ui/{type_}/HD/dxt5/{filename}"
-
-__all__ = [ "IslandPackage" ]

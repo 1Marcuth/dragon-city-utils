@@ -25,5 +25,3 @@ def calculate_recall_gain(dragon_level: int, dragon_stars: int) -> int:
         orbs_gain += ORB_RECALL_CONFIG["per_stars"][i]
 
     return orbs_gain
-
-__all__ = [ "calculate_recall_gain" ]

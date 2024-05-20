@@ -13,7 +13,7 @@ rank_class_power = {
     12: .70
 }
 
-one_star_power = 0.38223
+one_star_power = .38223
 
 attack_categories_power = {
     1: 3200,

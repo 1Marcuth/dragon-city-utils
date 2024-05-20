@@ -32,5 +32,3 @@ class DragonSprite(BaseStaticDownloader):
             raise ValueError(f"{image_quality} Not a valid number for image quality of a dragon. Choose a number between 1 and 2")
 
         self.url = f"https://{platform_prefix}-static-s1.socialpointgames.com/static/dragoncity/mobile/ui/dragons/ui_{image_name}{skin}_{phase}{image_quality_str}.png"
-
-__all__ = [ "DragonSprite" ]

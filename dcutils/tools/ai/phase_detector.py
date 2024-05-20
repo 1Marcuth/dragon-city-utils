@@ -42,5 +42,3 @@ class PhaseDetectorAI(BaseAI):
         }
 
         return result
-
-__all__ = [ "PhaseDetectorAI" ]

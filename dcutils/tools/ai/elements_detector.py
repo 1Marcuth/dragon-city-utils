@@ -17,7 +17,7 @@ class ElementsDetectorAI(BaseAI):
         super().__init__(config)
     
     @validate_call
-    def detect(self, image_path: str, limit=4) -> list[dict]:
+    def detect(self, image_path: str, limit = 4) -> list[dict]:
         image_size = (224, 224)
 
         image = Image.open(image_path).convert("RGB")
@@ -46,5 +46,3 @@ class ElementsDetectorAI(BaseAI):
         ]
 
         return results
-
-__all__ = [ "ElementsDetectorAI" ]

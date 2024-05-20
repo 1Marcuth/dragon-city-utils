@@ -31,5 +31,3 @@ class DragonSpineAnimation(BaseStaticDownloader):
             
         else:
             self.url = f"https://{platform_prefix}-static-s1.socialpointgames.com/static/dragoncity/mobile/engine/version_1_1/dragons/{image_name}_{phase}/basic_{image_name}{skin}_{phase}_HD_spine-3-8-59_{platform}.zip"
-
-__all__ = [ "DragonSpineAnimation" ]

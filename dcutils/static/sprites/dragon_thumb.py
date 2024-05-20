@@ -23,5 +23,3 @@ class DragonThumb(BaseStaticDownloader):
             skin = ""
         
         self.url = f"https://{platform_prefix}-static-s1.socialpointgames.com/static/dragoncity/mobile/ui/dragons/HD/thumb_{image_name}{skin}_{phase}.png"
-
-__all__ = [ "DragonThumb" ]

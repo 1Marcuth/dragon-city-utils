@@ -7,5 +7,3 @@ class BaseStaticDownloader:
     @validate_call
     def download(self, output: str):
         urlretrieve(self.url, output)
-
-__all__ = [ "BaseStaticDownloader" ]

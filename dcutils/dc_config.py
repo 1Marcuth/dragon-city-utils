@@ -5,5 +5,3 @@ DRAGON_ELEMENTS_TYPES = {
     "ch": "chaos", "mg": "magic", "hp": "happy","dr": "dream",
     "so": "soul", "pr": "primal", "wd": "wind","ti": "time"
 }
-
-__all__ = [ "DRAGON_ELEMENTS_TYPES" ]

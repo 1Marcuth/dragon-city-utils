@@ -26,8 +26,3 @@ def calculate_weaknesses(first_element: str) -> list[str]:
             weaknesses.append(element)
 
     return weaknesses
-
-__all__ = [
-    "calculate_strongs",
-    "calculate_weaknesses"
-]
